@@ -37,7 +37,6 @@ namespace HotelListing.Controllers
             })
             .ToArray();
 
-            Log.Information("end");
         }
     }
 }

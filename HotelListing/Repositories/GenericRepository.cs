@@ -30,21 +30,22 @@ namespace HotelListing.Repositories
             _db.RemoveRange(entities);
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes)
+        public async Task<T> Get(Expression<Func<T, bool>> expression,
+            List<string> includes = null)
         {
             IQueryable<T> query = _db;
             if (includes != null)
             {
                 foreach (var include in includes)
                 {
-                    query.Include(include);
+                    query = query.Include(include);
                 }
             }
 
             return await query.AsNoTracking().SingleOrDefaultAsync(expression);
         }
 
-        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression,
+        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             List<string> includes = null)
         {
@@ -52,14 +53,14 @@ namespace HotelListing.Repositories
 
             if (expression != null)
             {
-                query.Where(expression);
+                query = query.Where(expression);
             }
 
             if (includes != null)
             {
                 foreach (var include in includes)
                 {
-                    query.Include(include);
+                    query = query.Include(include);
                 }
             }
 

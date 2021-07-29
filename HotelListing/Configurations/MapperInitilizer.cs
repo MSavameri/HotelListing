@@ -12,10 +12,10 @@ namespace HotelListing.Configurations
     {
         public MapperInitilizer()
         {
-            CreateMap<Country, CountryDTO>();
-            CreateMap<Country, CreateCountryDTO>();
-            CreateMap<Hotel, HotelDTO>();
-            CreateMap<Hotel, CreateHotelDTO>();
+            CreateMap<Country, CountryDTO>().ReverseMap();
+            CreateMap<Country, CreateCountryDTO>().ReverseMap();
+            CreateMap<Hotel, HotelDTO>().ReverseMap();
+            CreateMap<Hotel, CreateHotelDTO>().ReverseMap();
         }   
     }
 }

@@ -1,5 +1,6 @@
 using HotelListing.Configurations;
 using HotelListing.Data;
+using HotelListing.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -41,9 +42,13 @@ namespace HotelListing
                 );
             });
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             services.AddAutoMapper(typeof(MapperInitilizer));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(op =>
+                        op.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

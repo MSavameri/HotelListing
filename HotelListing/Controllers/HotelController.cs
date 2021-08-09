@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelListing.Models;
 using HotelListing.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,7 @@ namespace HotelListing.Controllers
         }
 
 
+        [HttpGet]
         public async Task<IActionResult> GetHotels()
         {
             try
@@ -45,8 +47,8 @@ namespace HotelListing.Controllers
         }
 
 
-        [HttpGet]
-        [Route("{id:int}")]
+        [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> GetHotel(int id)
         {
             try

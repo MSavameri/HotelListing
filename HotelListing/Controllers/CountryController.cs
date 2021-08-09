@@ -46,8 +46,7 @@ namespace HotelListing.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetCountry(int id)
         {
             try
